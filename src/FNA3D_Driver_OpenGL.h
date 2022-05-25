@@ -199,6 +199,7 @@ typedef unsigned char	GLboolean;
 #define GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT		0x8C4F
 #define GL_COMPRESSED_RGBA_BPTC_UNORM_EXT		0x8E8C
 #define GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT		0x8E8D
+#define GL_COMPRESSED_RGBA_ASTC_4x4       0x93B0
 
 /* EXT_framebuffer_sRGB */
 #define GL_FRAMEBUFFER_SRGB_EXT				0x8DB9
@@ -218,6 +219,7 @@ typedef unsigned char	GLboolean;
 #define GL_TEXTURE_BASE_LEVEL				0x813C
 #define GL_TEXTURE_MAX_LEVEL				0x813D
 #define GL_TEXTURE_LOD_BIAS				0x8501
+#define GL_TEXTURE_ASTC_DECODE_PRECISION_EXT 0x8F69
 #define GL_UNPACK_ALIGNMENT				0x0CF5
 
 /* Multitexture */

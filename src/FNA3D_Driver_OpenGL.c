@@ -343,6 +343,7 @@ static int32_t XNAToGL_TextureFormat[] =
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Dxt5SrgbEXT */
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Bc7EXT */
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Bc7SrgbEXT */
+	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Astc4x4EXT */
 };
 
 static int32_t XNAToGL_TextureInternalFormat[] =
@@ -372,6 +373,7 @@ static int32_t XNAToGL_TextureInternalFormat[] =
 	GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT,	/* SurfaceFormat.Dxt5SrgbEXT */
 	GL_COMPRESSED_RGBA_BPTC_UNORM_EXT,	/* SurfaceFormat.BC7EXT */
 	GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT,/* SurfaceFormat.BC7SrgbEXT */
+	GL_COMPRESSED_RGBA_ASTC_4x4,/*SurfaceFormat.Astc4x4EXT*/
 };
 
 static int32_t XNAToGL_TextureDataType[] =
@@ -3606,6 +3608,17 @@ static FNA3D_Texture* OPENGL_CreateTexture2D(
 	glInternalFormat = XNAToGL_TextureInternalFormat[format];
 	if (glFormat == GL_COMPRESSED_TEXTURE_FORMATS)
 	{
+		// Enable UNORM8 decoding when using ASTC, since we're only working with
+		// ldr textures, we have no use for FP16 precision.
+		if (glInternalFormat == GL_COMPRESSED_RGBA_ASTC_4x4)
+		{
+			renderer->glTexParameteri(
+				GL_TEXTURE_2D,
+				GL_TEXTURE_ASTC_DECODE_PRECISION_EXT,
+				GL_RGBA8
+			);
+		}
+
 		for (i = 0; i < levelCount; i += 1)
 		{
 			levelWidth = SDL_max(width >> i, 1);
@@ -3879,6 +3892,7 @@ static void OPENGL_SetTextureData2D(
 	glFormat = XNAToGL_TextureFormat[glTexture->format];
 	if (glFormat == GL_COMPRESSED_TEXTURE_FORMATS)
 	{
+		FNA3D_LogInfo("Uploading texture %d, %dx%d with %d bytes\n", XNAToGL_TextureInternalFormat[glTexture->format], w, h, dataLength);
 		/* Note that we're using glInternalFormat, not glFormat.
 		 * In this case, they should actually be the same thing,
 		 * but we use glFormat somewhat differently for

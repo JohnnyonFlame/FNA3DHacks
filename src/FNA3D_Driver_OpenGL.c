@@ -3611,16 +3611,17 @@ static FNA3D_Texture* OPENGL_CreateTexture2D(
 	glInternalFormat = XNAToGL_TextureInternalFormat[format];
 	if (glFormat == GL_COMPRESSED_TEXTURE_FORMATS)
 	{
+		// This seems to not work correctly on some MALI drivers, amazing.
 		// Enable UNORM8 decoding when using ASTC, since we're only working with
 		// ldr textures, we have no use for FP16 precision.
-		if (glInternalFormat == GL_COMPRESSED_RGBA_ASTC_4x4)
-		{
-			renderer->glTexParameteri(
-				GL_TEXTURE_2D,
-				GL_TEXTURE_ASTC_DECODE_PRECISION_EXT,
-				GL_RGBA8
-			);
-		}
+		// if (glInternalFormat == GL_COMPRESSED_RGBA_ASTC_4x4)
+		// {
+		// 	renderer->glTexParameteri(
+		// 		GL_TEXTURE_2D,
+		// 		GL_TEXTURE_ASTC_DECODE_PRECISION_EXT,
+		// 		GL_RGBA8
+		// 	);
+		// }
 
 		for (i = 0; i < levelCount; i += 1)
 		{

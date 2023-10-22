@@ -347,6 +347,9 @@ static int32_t XNAToGL_TextureFormat[] =
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Bc7EXT */
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Bc7SrgbEXT */
 	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Astc4x4EXT */
+	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Astc5x5EXT */
+	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Astc6x6EXT */
+	GL_COMPRESSED_TEXTURE_FORMATS,	/* SurfaceFormat.Astc8x8EXT */
 };
 
 static int32_t XNAToGL_TextureInternalFormat[] =
@@ -377,6 +380,9 @@ static int32_t XNAToGL_TextureInternalFormat[] =
 	GL_COMPRESSED_RGBA_BPTC_UNORM_EXT,	/* SurfaceFormat.BC7EXT */
 	GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT,/* SurfaceFormat.BC7SrgbEXT */
 	GL_COMPRESSED_RGBA_ASTC_4x4,/*SurfaceFormat.Astc4x4EXT*/
+	GL_COMPRESSED_RGBA_ASTC_5x5,/*SurfaceFormat.Astc5x5EXT*/
+	GL_COMPRESSED_RGBA_ASTC_6x6,/*SurfaceFormat.Astc6x6EXT*/
+	GL_COMPRESSED_RGBA_ASTC_8x8,/*SurfaceFormat.Astc8x8EXT*/
 };
 
 static int32_t XNAToGL_TextureDataType[] =
@@ -403,6 +409,10 @@ static int32_t XNAToGL_TextureDataType[] =
 	GL_HALF_FLOAT,			/* SurfaceFormat.HdrBlendable */
 	GL_UNSIGNED_BYTE,		/* SurfaceFormat.ColorBgraEXT */
 	GL_UNSIGNED_BYTE,		/* SurfaceFormat.ColorSrgbEXT */
+	GL_ZERO,			/* NOPE */
+	GL_ZERO,			/* NOPE */
+	GL_ZERO,			/* NOPE */
+	GL_ZERO,			/* NOPE */
 	GL_ZERO,			/* NOPE */
 	GL_ZERO,			/* NOPE */
 	GL_ZERO,			/* NOPE */
@@ -3614,7 +3624,8 @@ static FNA3D_Texture* OPENGL_CreateTexture2D(
 		// This seems to not work correctly on some MALI drivers, amazing.
 		// Enable UNORM8 decoding when using ASTC, since we're only working with
 		// ldr textures, we have no use for FP16 precision.
-		// if (glInternalFormat == GL_COMPRESSED_RGBA_ASTC_4x4)
+		// if (glInternalFormat == GL_COMPRESSED_RGBA_ASTC_4x4 ||
+		// 	glInternalFormat == GL_COMPRESSED_RGBA_ASTC_5x5)
 		// {
 		// 	renderer->glTexParameteri(
 		// 		GL_TEXTURE_2D,

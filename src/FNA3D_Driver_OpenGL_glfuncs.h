@@ -47,6 +47,7 @@ GL_EXT(KHR_debug)
 GL_EXT(GREMEDY_string_marker)
 
 /* Basic entry points. If you don't have these, you're screwed. */
+GL_PROC(BaseGL, GLenum, glGetError, (void))
 GL_PROC(BaseGL, void, glActiveTexture, (GLenum a))
 GL_PROC(BaseGL, void, glBindBuffer, (GLenum a, GLuint b))
 GL_PROC(BaseGL, void, glBindTexture, (GLenum a, GLuint b))

@@ -171,7 +171,7 @@ uint32_t FNA3D_PrepareWindowAttributes(void)
 
 FNA3DAPI void FNA3D_GetDrawableSize(void* window, int32_t *w, int32_t *h)
 {
-	SDL_GetWindowSizeInPixels((SDL_Window*) window, w, h);
+	SDL_GetWindowSize((SDL_Window*) window, w, h);
 }
 
 /* Init/Quit */

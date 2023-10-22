@@ -1503,7 +1503,7 @@ static void D3D11_SwapBuffers(
 	if (renderer->backbuffer->type == BACKBUFFER_TYPE_D3D11)
 	{
 		/* Determine the regions to present */
-		SDL_GetWindowSizeInPixels(
+		SDL_GetWindowSize(
 			(SDL_Window*) overrideWindowHandle,
 			&drawableWidth,
 			&drawableHeight
@@ -2654,7 +2654,7 @@ static void D3D11_INTERNAL_CreateBackbuffer(
 	if (!useFauxBackbuffer)
 	{
 		int32_t drawX, drawY;
-		SDL_GetWindowSizeInPixels(
+		SDL_GetWindowSize(
 			(SDL_Window*) parameters->deviceWindowHandle,
 			&drawX,
 			&drawY

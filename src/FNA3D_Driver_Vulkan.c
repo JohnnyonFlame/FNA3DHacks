@@ -4741,7 +4741,7 @@ static CreateSwapchainResult VULKAN_INTERNAL_CreateSwapchain(
 		return CREATE_SWAPCHAIN_FAIL;
 	}
 
-	SDL_GetWindowSizeInPixels(
+	SDL_GetWindowSize(
 		(SDL_Window*) windowHandle,
 		&drawableWidth,
 		&drawableHeight

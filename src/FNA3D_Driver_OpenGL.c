@@ -1344,7 +1344,7 @@ static void OPENGL_SwapBuffers(
 		{
 			dstX = 0;
 			dstY = 0;
-			SDL_GetWindowSizeInPixels(
+			SDL_GetWindowSize(
 				(SDL_Window*) overrideWindowHandle,
 				&dstW,
 				&dstH
@@ -2863,7 +2863,7 @@ static void OPENGL_INTERNAL_CreateBackbuffer(
 ) {
 	int32_t useFauxBackbuffer;
 	int32_t drawX, drawY;
-	SDL_GetWindowSizeInPixels(
+	SDL_GetWindowSize(
 		(SDL_Window*) parameters->deviceWindowHandle,
 		&drawX,
 		&drawY
